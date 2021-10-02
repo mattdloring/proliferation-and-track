@@ -1,5 +1,7 @@
-import scipy.ndimage
 import numpy as np
+import scipy.ndimage
+import csv
+import pandas as pd
 
 def create_nuclear_mask(txyz_coords,resolution,shape,gaussian_size):
     ''' Create a gaussian mask around each txyz coordinate in the dataset
@@ -40,12 +42,10 @@ def create_nuclear_mask(txyz_coords,resolution,shape,gaussian_size):
     mask_gaussian = mask_gaussian/max_val
     return mask_gaussian
 
-
-
-
-
-
-
+def load_csv (filename):
+    df = pd.read_csv(filename)
+    txyz_coords = df.loc[:,['T','X','Y','Z']]
+    return txyz_coords.to_numpy()
 
 
 

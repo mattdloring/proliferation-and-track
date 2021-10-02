@@ -1,4 +1,6 @@
 import scipy.ndimage
+import numpy as np
+
 def create_nuclear_mask(txyz_coords,resolution,shape,gaussian_size):
     ''' Create a gaussian mask around each txyz coordinate in the dataset
     Inputs: 
@@ -31,8 +33,12 @@ def create_nuclear_mask(txyz_coords,resolution,shape,gaussian_size):
         z = co[3]
         mask_arr[t][x][y][z] = 1
 
-    mask_gaussian = scipy.ndimage.gaussian_filter(mask_arr, sigma=gaussian_size)
+    sigma = [0,gaussian_size/resolution[1],gaussian_size/resolution[2],gaussian_size/resolution[3]]
+    mask_gaussian = scipy.ndimage.gaussian_filter(mask_arr, sigma=sigma)
 
+    max_val = np.max(mask_gaussian)
+    mask_gaussian = mask_gaussian/max_val
+    return mask_gaussian
 
 
 

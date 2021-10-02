@@ -4,7 +4,7 @@ from create_nuclear_mask import create_nuclear_mask
 
 def test_case():
     txyz_coords = [[5, 5, 5, 5]]
-    resolution = [[1, 1, 1, 2]]
+    resolution = [1, 1, 1, 2]
     shape = (10, 10, 10, 10)
     gaussian_size = 1
     labels = create_nuclear_mask(

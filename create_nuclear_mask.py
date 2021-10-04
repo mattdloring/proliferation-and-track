@@ -66,7 +66,6 @@ def save_mask(mask, filename):
     opened_zarr['GT'].attrs['resolution'] = [1,1.75,1,1]
     opened_zarr['GT'].attrs['offset'] = [0, 0, 0, 0]
 
-def
 
 if __name__ == "__main__":
     # Configuration

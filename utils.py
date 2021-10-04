@@ -37,14 +37,17 @@ def convert_to_n5(input_path, outfile, key='raw', resolution=None):
         raise NotImplemented('Only takes a directory or tif')
 
     assert len(files) > 0, f"No tif files in {input_path}"
-    logger.debug(files)
+    print(files)
 
     raw = np.array([imread(f) for f in tqdm(files)])
-    logger.debug(raw.shape)
-    logger.debug(raw.dtype)
-    logger.debug(raw.min(), raw.max())
+    raw = np.squeeze(raw)
+    print(raw.shape)
+    print(raw.dtype)
+    print(raw.min(), raw.max())
 
+    print(outfile)
     f = zarr.open(outfile, 'a')
+    print(f.keys())
     f[key] = raw
     # x, y, z, t for N5
     if resolution is None:

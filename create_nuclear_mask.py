@@ -57,12 +57,12 @@ def load_csv (filename):
 def save_mask(mask, filename):
     print("saving tiff at file" + filename)
     # reorder the dimensions: tzyx -> xyczt
-    transposed_mask = np.transpose(mask, [3,2,1,0])
-    print(transposed_mask.shape)
-    with_channel = np.expand_dims(transposed_mask, 2)
-    print(with_channel.shape)
+    # transposed_mask = np.transpose(mask, [3,2,1,0])
+    print(mask.shape)
+    # with_channel = np.expand_dims(mask, 2)
+    # print(with_channel.shape)
     opened_zarr = zarr.open(filename, 'w')
-    opened_zarr['GT'] = with_channel
+    opened_zarr['GT'] = mask
     opened_zarr['GT'].attrs['resolution'] = [1,1.75,1,1]
     opened_zarr['GT'].attrs['offset'] = [0, 0, 0, 0]
 
@@ -79,13 +79,12 @@ if __name__ == "__main__":
 
     # running code
     csv = load_csv(csv_file1)
-    print(csv)
+    # print(csv)
     mask = create_nuclear_mask(csv, [1, 1.75, 1, 1], dataset_shape1, gaussian_size)
     print('done masking')
-    save_mask(mask, zarrfile1)
+    save_mask(mask, zarrfile2)
 
     csv = load_csv(csv_file2)
-    print(csv)
     mask = create_nuclear_mask(csv, [1, 1.75, 1, 1], dataset_shape2, gaussian_size)
     print('done masking')
     save_mask(mask, zarrfile2)

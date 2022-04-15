@@ -1,2 +1,3 @@
 # proliferation-and-track
-we do proliferation and tracking
+
+Some cell segmentation and tracking from summer 2021 MBL
